@@ -15,3 +15,4 @@ The riddle class manages the logic of the questions and gives the time
 the import class retrieves the riddles and exports them at once
 app.js launches the game and handles the game logic
 The riddles folder keeps all the riddles
+the class multiplechoice add other logic with choices to answer
