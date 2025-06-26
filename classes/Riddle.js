@@ -31,6 +31,6 @@ export default class Riddle {
         const end = Date.now()
 
         return end - start
-
     }
+
 }

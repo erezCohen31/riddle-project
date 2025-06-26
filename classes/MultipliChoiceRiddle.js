@@ -38,12 +38,5 @@ export default class MultipleChoiceRiddle extends Riddle {
 
 
     }
-    startQuestion() {
-        const start = Date.now()
-        this.ask()
-        const end = Date.now()
 
-        return end - start
-
-    }
 }
