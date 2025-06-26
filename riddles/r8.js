@@ -2,5 +2,6 @@ export default {
     id: 8,
     name: "History",
     taskDescription: "Who was the first president of the United States?",
-    correctAnswer: "George Washington"
+    correctAnswer: "George Washington",
+    choices: ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"]
 }

@@ -1,5 +1,6 @@
 import Player from "./classes/Player.js"
 import Riddle from "./classes/Riddle.js"
+import MultipleChoiceRiddle from "./classes/MultipliChoiceRiddle.js"
 import riddles from "./classes/Import.js";
 import readline from 'readline-sync';
 
@@ -10,9 +11,9 @@ console.log("Hello " + name);
 const player = new Player(name)
 
 for (const riddleData of riddles) {
-    const riddle = new Riddle(riddleData)
+    const riddle = new MultipleChoiceRiddle(riddleData)
     const time = riddle.startQuestion()
-    console.log(`🕒 You took ${time} ms to answer.`);
+    console.log(` You took ${time} ms to answer.`);
 
     player.addTime(time)
 }
