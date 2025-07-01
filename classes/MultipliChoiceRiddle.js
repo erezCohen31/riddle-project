@@ -9,43 +9,49 @@ export default class MultipleChoiceRiddle extends Riddle {
     }
 
     ask() {
-        console.log(this.name);
-        console.log(this.taskDescription);
+        try {
+            console.log(this.name);
+            console.log(this.taskDescription);
 
-        this.choices.forEach((choice, index) => {
-            console.log(`${index + 1}) ${choice}`);
-        });
+            this.choices.forEach((choice, index) => {
+                console.log(`${index + 1}) ${choice}`);
+            });
 
-        let isCorrect = false
+            let isCorrect = false;
 
-        while (!isCorrect) {
+            while (!isCorrect) {
 
-            let goodInput = false;
-            let answer = ""
+                const answer = GetInput()
 
-            while (!goodInput) {
-                const input = readline.questionInt("Your choice: ");
-                if (input > 0 && input < 5) {
-                    goodInput = true
-                    answer = this.choices[input - 1];
-                    break;
+                if (answer.toLowerCase() === this.correctAnswer.toLowerCase()) {
+                    isCorrect = true;
+                    console.log("Correct answer!");
+                } else {
+                    console.log("Not correct, try again.");
                 }
-                console.log("Invalid choice, try again.");
-
             }
-
-            if (answer.toLowerCase() === this.correctAnswer.toLowerCase()) {
-                isCorrect = true
-                console.log("correct answer");
-
-            } else {
-                console.log("not correct try again");
-
-            }
-
+        } catch (err) {
+            console.error("An error occurred while asking the riddle:", err.message);
         }
+    }
+}
 
-
+function GetInput() {
+    let goodInput = false;
+    let answer = "";
+    while (!goodInput) {
+        try {
+            const input = readline.questionInt("Your choice: ");
+            if (input > 0 && input <= 4) {
+                goodInput = true;
+                answer = this.choices[input - 1];
+                return answer
+            } else {
+                console.log("Invalid choice, try again.");
+            }
+        } catch (err) {
+            console.log("Please enter a valid number.");
+        }
     }
 
 }
