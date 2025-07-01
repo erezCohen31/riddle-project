@@ -19,13 +19,22 @@ export default class MultipleChoiceRiddle extends Riddle {
         let isCorrect = false
 
         while (!isCorrect) {
-            const input = readline.questionInt("Your choice: ");
-            const answer = this.choices[input - 1];
 
-            if (!answer) {
+            let goodInput = false;
+            let answer = ""
+
+            while (!goodInput) {
+                const input = readline.questionInt("Your choice: ");
+                if (input > 0 && input < 5) {
+                    goodInput = true
+                    answer = this.choices[input - 1];
+                    break;
+                }
                 console.log("Invalid choice, try again.");
-                continue;
-            } if (answer.toLowerCase() === this.correctAnswer.toLowerCase()) {
+
+            }
+
+            if (answer.toLowerCase() === this.correctAnswer.toLowerCase()) {
                 isCorrect = true
                 console.log("correct answer");
 
