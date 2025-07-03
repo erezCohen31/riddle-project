@@ -1,4 +1,4 @@
-import { readAll } from "./Read.js";
+import { read } from "./fileHelper.js";
 import readline from 'readline-sync';
 import { write } from "./fileHelper.js";
 
@@ -7,9 +7,9 @@ import { write } from "./fileHelper.js";
 const filePath = '../DB/riddles.txt';
 
 
-async function addRiddle(filePath) {
+export async function addRiddle(filePath) {
     try {
-        const riddles = await readAll(filePath);
+        const riddles = await read(filePath);
         const newRiddle = createRiddle(riddles);
         riddles.push(newRiddle);
         await write(filePath, riddles);
@@ -54,4 +54,3 @@ function createRiddle(riddles) {
     return newRiddle;
 }
 
-addRiddle(filePath);
