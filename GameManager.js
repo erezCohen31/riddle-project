@@ -12,6 +12,11 @@ export default async function RunMainMenu() {
         const name = readline.question("enter your name:\n")
         const player = await findOrCreatePlayer(playersPath, name)
         console.log("Hello " + name);
+        if (player.lowestTime > 0) {
+            console.log(`Hi ${player.name}! Your previous lowest time was ${player.lowestTime} seconds.`);
+
+        }
+
         while (!isQuit) {
             console.log(`1. To play`);
             console.log(`2. Modify riddles`);
@@ -69,7 +74,15 @@ async function RunRiddles(riddlesPath, player) {
         player.addTime(time)
     }
     player.showStats()
-    await UpdateTimeOfPlayer(playersPath, player.id, player.totalTime())
+
+    const upperScore = await UpdateTimeOfPlayer(playersPath, player.id, player.totalTime())
+    if (upperScore) {
+        console.log(`Great job, ${player.name}!
+New record! Time updated.`);
+
+
+    }
+    player.times = []
 
 }
 

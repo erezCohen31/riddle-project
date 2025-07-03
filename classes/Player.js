@@ -1,9 +1,9 @@
 export default class Player {
-    constructor(name, id) {
+    constructor(name, id, lowestTime) {
         this.id = id
         this.name = name
         this.times = []
-        this.lowestTime = 0
+        this.lowestTime = lowestTime
     }
     addTime(time) {
         this.times.push(time)
