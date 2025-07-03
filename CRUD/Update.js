@@ -41,4 +41,3 @@ function changeRiddle(riddles, targetId) {
 
 const filePath = '../DB/riddles.txt';
 
-updateRiddle(filePath, 11)
