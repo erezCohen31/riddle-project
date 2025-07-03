@@ -1,4 +1,4 @@
-import { read, write } from "./fileHelper.js";
+import { read, write } from "../utils/fileHelper.js";
 import Player from "../classes/Player.js";
 
 export async function findOrCreatePlayer(filePath, name) {

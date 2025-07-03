@@ -5,11 +5,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 export async function write(filePath, data) {
     try {
         await writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
-
+        return true;
     } catch (error) {
-        console.error(error)
+        console.error('Error writing to file:', error.message);
     }
-
 }
 
 export async function read(filePath) {
