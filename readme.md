@@ -15,7 +15,7 @@ A command-line riddle game where players can test their problem-solving skills w
 1. Make sure you have [Node.js](https://nodejs.org/) (version 14 or higher) installed
 2. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/riddle-project.git
+   git clone https://github.com/erezCohen31/riddle-project.git   
    cd riddle-project
    ```
 3. Install dependencies:
