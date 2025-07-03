@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 export async function write(filePath, riddles) {
     try {
         await writeFile(filePath, JSON.stringify(riddles, null, 2), 'utf-8');
+
     } catch (error) {
         console.error(error)
     }

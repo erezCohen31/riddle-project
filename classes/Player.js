@@ -1,7 +1,9 @@
 export default class Player {
-    constructor(name) {
+    constructor(name, id) {
+        this.id = id
         this.name = name
         this.times = []
+        this.lowestTime = 0
     }
     addTime(time) {
         this.times.push(time)
@@ -24,4 +26,10 @@ Average per riddle: ${(avg / 1000).toFixed(2)} seconds`)
     averageTime(totalTime) {
         return totalTime / this.times.length
     }
+    showBestTime() {
+        console.log(this.lowestTime);
+
+    }
+
+
 }

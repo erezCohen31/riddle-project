@@ -1,5 +1,6 @@
 import { addRiddle, DeleteRiddleById, updateRiddle, readAll, } from "../CRUD/RiddleManager.js";
 import { read } from "../CRUD/fileHelper.js";
+import { findOrCreatePlayer, UpdateTimeOfPlayer } from "../CRUD/PlayerManager.js";
 
 
 
@@ -8,5 +9,7 @@ export {
     read,
     DeleteRiddleById,
     updateRiddle,
-    readAll
+    readAll,
+    findOrCreatePlayer,
+    UpdateTimeOfPlayer
 };

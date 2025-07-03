@@ -1,16 +1,16 @@
-import Player from "./classes/Player.js"
 import MultipleChoiceRiddle from "./classes/MultipliChoiceRiddle.js"
 import readline from 'readline-sync';
-import { addRiddle, read, DeleteRiddleById, updateRiddle, readAll } from "./classes/Import.js";
+import { addRiddle, read, DeleteRiddleById, updateRiddle, readAll, findOrCreatePlayer, UpdateTimeOfPlayer } from "./classes/Import.js";
 
-const filePath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/riddles.txt"
+const riddlesPath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/riddles.txt"
+const playersPath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/players.txt"
 
 
 export default async function RunMainMenu() {
     try {
         let isQuit = false
         const name = readline.question("enter your name:\n")
-        const player = new Player(name)
+        const player = await findOrCreatePlayer(playersPath, name)
         console.log("Hello " + name);
         while (!isQuit) {
             console.log(`1. To play`);
@@ -21,10 +21,10 @@ export default async function RunMainMenu() {
 
             switch (choice) {
                 case "1":
-                    await RunRiddles(filePath, player)
+                    await RunRiddles(riddlesPath, player)
                     break;
                 case "2":
-                    await ModifyRiddlesMenu(filePath)
+                    await ModifyRiddlesMenu(riddlesPath)
                     break
                 case "3":
                     isQuit = true
@@ -45,8 +45,8 @@ export default async function RunMainMenu() {
 }
 
 
-async function chooserRiddles(filePath) {
-    const riddles = await read(filePath)
+async function chooserRiddles(riddlesPath) {
+    const riddles = await read(riddlesPath)
     const choosedRiddles = []
 
     for (let index = 0; index < 2; index++) {
@@ -58,8 +58,8 @@ async function chooserRiddles(filePath) {
     }
     return choosedRiddles;
 }
-async function RunRiddles(filePath, player) {
-    const choosenRiddles = await chooserRiddles(filePath);
+async function RunRiddles(riddlesPath, player) {
+    const choosenRiddles = await chooserRiddles(riddlesPath);
 
     for (const riddleData of choosenRiddles) {
         const riddle = new MultipleChoiceRiddle(riddleData)
@@ -71,7 +71,7 @@ async function RunRiddles(filePath, player) {
     player.showStats()
 }
 
-async function ModifyRiddlesMenu(filePath) {
+async function ModifyRiddlesMenu(riddlesPath) {
 
     let isQuit = false
 
@@ -87,18 +87,18 @@ async function ModifyRiddlesMenu(filePath) {
 
         switch (choice) {
             case "1":
-                await addRiddle(filePath)
+                await addRiddle(riddlesPath)
                 break;
             case "2":
-                await readAll(filePath);
+                await readAll(riddlesPath);
                 break
             case "3":
                 const targetIdToUpdate = readline.question("enter id:\n")
-                await updateRiddle(filePath, Number(targetIdToUpdate))
+                await updateRiddle(riddlesPath, Number(targetIdToUpdate))
                 break
             case "4":
                 const targetIdToDelete = readline.question("enter id:\n")
-                await DeleteRiddleById(filePath, Number(targetIdToDelete))
+                await DeleteRiddleById(riddlesPath, Number(targetIdToDelete))
                 break
             case "5":
                 isQuit = true
