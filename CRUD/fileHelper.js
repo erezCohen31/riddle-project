@@ -2,9 +2,9 @@ import { console } from "inspector";
 import { readFile, writeFile } from 'node:fs/promises';
 
 
-export async function write(filePath, riddles) {
+export async function write(filePath, data) {
     try {
-        await writeFile(filePath, JSON.stringify(riddles, null, 2), 'utf-8');
+        await writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
 
     } catch (error) {
         console.error(error)

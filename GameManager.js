@@ -69,6 +69,8 @@ async function RunRiddles(riddlesPath, player) {
         player.addTime(time)
     }
     player.showStats()
+    await UpdateTimeOfPlayer(playersPath, player.id, player.totalTime())
+
 }
 
 async function ModifyRiddlesMenu(riddlesPath) {
