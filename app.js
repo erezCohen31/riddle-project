@@ -1,5 +1,5 @@
-import GameManager from './GameManager.js';
+import main from './GameManager.js';
 
-const gameManager = new GameManager
-gameManager.main()
+
+main()
 

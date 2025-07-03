@@ -8,7 +8,7 @@ export default class MultipleChoiceRiddle extends Riddle {
         this.choices = data.choices
     }
 
-    ask() {
+    async ask() {
         try {
             console.log(this.name);
             console.log(this.taskDescription);
@@ -21,7 +21,7 @@ export default class MultipleChoiceRiddle extends Riddle {
 
             while (!isCorrect) {
 
-                const answer = GetInput()
+                const answer = GetInput(this.choices)
 
                 if (answer.toLowerCase() === this.correctAnswer.toLowerCase()) {
                     isCorrect = true;
@@ -34,9 +34,10 @@ export default class MultipleChoiceRiddle extends Riddle {
             console.error("An error occurred while asking the riddle:", err.message);
         }
     }
+
 }
 
-function GetInput() {
+function GetInput(choices) {
     let goodInput = false;
     let answer = "";
     while (!goodInput) {
@@ -44,7 +45,7 @@ function GetInput() {
             const input = readline.questionInt("Your choice: ");
             if (input > 0 && input <= 4) {
                 goodInput = true;
-                answer = this.choices[input - 1];
+                answer = choices[input - 1];
                 return answer
             } else {
                 console.log("Invalid choice, try again.");
@@ -55,3 +56,4 @@ function GetInput() {
     }
 
 }
+
