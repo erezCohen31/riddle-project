@@ -2,8 +2,8 @@ import Player from "./classes/Player.js"
 import MultipleChoiceRiddle from "./classes/MultipliChoiceRiddle.js"
 import readline from 'readline-sync';
 import { readAll } from "./CRUD/Read.js";
+
 const filePath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/riddles.txt"
-import riddles from "./classes/Import.js";
 
 
 export default async function main() {
