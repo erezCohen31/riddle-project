@@ -94,11 +94,11 @@ async function ModifyRiddlesMenu(filePath) {
                 break
             case "3":
                 const targetIdToUpdate = readline.question("enter id:\n")
-                await updateRiddle(filePath, targetIdToUpdate)
+                await updateRiddle(filePath, Number(targetIdToUpdate))
                 break
             case "4":
                 const targetIdToDelete = readline.question("enter id:\n")
-                await DeleteRiddleById(filePath, targetIdToDelete)
+                await DeleteRiddleById(filePath, Number(targetIdToDelete))
                 break
             case "5":
                 isQuit = true
@@ -115,4 +115,5 @@ async function ModifyRiddlesMenu(filePath) {
 
 
 }
+
 

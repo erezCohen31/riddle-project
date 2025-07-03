@@ -15,7 +15,7 @@ export async function updateRiddle(filePath, targetId) {
 
 function changeRiddle(riddles, targetId) {
 
-    const riddle = riddles.find(riddle => riddle.id === Number(targetId));
+    const riddle = riddles.find(riddle => riddle.id === targetId);
     if (!riddle) {
         console.log(`No riddle found with id ${targetId}`);
         return riddles;

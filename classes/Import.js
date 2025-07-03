@@ -1,8 +1,5 @@
-import { addRiddle } from "../CRUD/Create.js";
+import { addRiddle, DeleteRiddleById, updateRiddle, readAll, } from "../CRUD/RiddleManager.js";
 import { read } from "../CRUD/fileHelper.js";
-import { DeleteRiddleById } from "../CRUD/Delete.js";
-import { updateRiddle } from "../CRUD/Update.js"
-import { readAll } from "../CRUD/Read.js"
 
 
 

@@ -14,11 +14,12 @@ export async function addRiddle(filePath) {
         riddles.push(newRiddle);
         await write(filePath, riddles);
 
-        console.log("New riddle addes !");
+        console.log("New riddle added !");
     } catch (err) {
         console.error("error :", err.message);
     }
 }
+
 
 function createRiddle(riddles) {
     const name = readline.question("Category (e.g. Math, Logic, etc.): ");
