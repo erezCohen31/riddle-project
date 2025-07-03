@@ -9,23 +9,24 @@ export default class Player {
         this.times.push(time)
     }
     showStats() {
-        const total = this.totalTime()
-        const avg = this.averageTime(total)
-
+        const total = this.totalTime();
+        const avg = this.averageTime(total);
         console.log(`\nGreat job, ${this.name}!
-Total time: ${Math.round(total / 1000)} seconds
-Average per riddle: ${(avg / 1000).toFixed(2)} seconds`)
+Total time: ${total} seconds
+Average per riddle: ${(avg / 1000).toFixed(2)} seconds`);
     }
+
     totalTime() {
-        let totalTime = 0
-        this.times.forEach(time =>
-            totalTime += time
-        )
-        return totalTime
+        let totalTime = 0;
+        this.times.forEach(time => totalTime += time);
+        return Math.round(totalTime / 1000);
     }
+
     averageTime(totalTime) {
-        return totalTime / this.times.length
+        if (this.times.length === 0) return 0;
+        return (totalTime * 1000) / this.times.length;
     }
+
     showBestTime() {
         console.log(this.lowestTime);
 
