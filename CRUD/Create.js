@@ -1,6 +1,6 @@
-import { writeFile } from 'fs/promises';
 import { readAll } from "./Read.js";
 import readline from 'readline-sync';
+import { write } from "./fileHelper.js";
 
 
 
@@ -12,13 +12,14 @@ async function addRiddle(filePath) {
         const riddles = await readAll(filePath);
         const newRiddle = createRiddle(riddles);
         riddles.push(newRiddle);
-        await writeFile(filePath, JSON.stringify(riddles, null, 2), 'utf-8');
+        await write(filePath, riddles);
 
         console.log("New riddle addes !");
     } catch (err) {
         console.error("error :", err.message);
     }
 }
+
 function createRiddle(riddles) {
     const name = readline.question("Category (e.g. Math, Logic, etc.): ");
     const taskDescription = readline.question("Riddle question: ");

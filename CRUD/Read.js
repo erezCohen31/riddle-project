@@ -1,9 +1,9 @@
-import { readFile } from 'node:fs/promises';
+import { read } from "./fileHelper.js";
+
 
 export async function readById(filePath, riddleId) {
     try {
-        const data = await readFile(filePath, 'utf-8');
-        const riddles = JSON.parse(data);
+        const riddles = read(filePath)
         const riddle = riddles.find(riddle => riddle.id === riddleId);
         return riddle
     } catch (error) {
@@ -14,12 +14,13 @@ export async function readById(filePath, riddleId) {
 
 export async function readAll(filePath) {
     try {
-        const data = await readFile(filePath, 'utf-8');
-        const riddles = JSON.parse(data);
+        const riddles = read(filePath)
         return riddles
     } catch (error) {
         console.error(error)
         return null;
     }
 }
+//const filePath = '../DB/riddles.txt';
+//console.log(await readAll(filePath));
 
