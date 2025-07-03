@@ -1,5 +1,4 @@
-import main from './GameManager.js';
+import RunMainMenu from './GameManager.js';
 
 
-main()
-
+RunMainMenu()

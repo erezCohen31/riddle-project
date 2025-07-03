@@ -1,11 +1,11 @@
 import { read, write } from "./fileHelper.js";
 
 
-async function DeleteRiddleById(filePath, targetId) {
+export async function DeleteRiddleById(filePath, targetId) {
     try {
         const riddles = await read(filePath)
         const initialLength = riddles.length;
-        const newRiddles = riddles.filter(riddle => riddle.id !== targetId);
+        const newRiddles = riddles.filter(riddle => riddle.id !== Number(targetId));
 
         if (newRiddles.length === initialLength) {
             console.log(`No riddle found with id ${targetId}`);
@@ -22,4 +22,3 @@ async function DeleteRiddleById(filePath, targetId) {
 }
 const filePath = '../DB/riddles.txt';
 
-DeleteRiddleById(filePath, 11)

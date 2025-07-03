@@ -1,37 +1,55 @@
 import Player from "./classes/Player.js"
 import MultipleChoiceRiddle from "./classes/MultipliChoiceRiddle.js"
 import readline from 'readline-sync';
-import { readAll } from "./CRUD/Read.js";
+import { addRiddle, read, DeleteRiddleById, updateRiddle, readAll } from "./classes/Import.js";
 
 const filePath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/riddles.txt"
 
 
-export default async function main() {
+export default async function RunMainMenu() {
     try {
+        let isQuit = false
         const name = readline.question("enter your name:\n")
-        console.log("Hello " + name);
-
         const player = new Player(name)
-        const riddles = await readAll(filePath)
-        const choosenRiddles = chooserRiddles(riddles);
+        console.log("Hello " + name);
+        while (!isQuit) {
+            console.log(`1. To play`);
+            console.log(`2. Modify riddles`);
+            console.log(`3. to quit`);
 
-        for (const riddleData of choosenRiddles) {
-            const riddle = new MultipleChoiceRiddle(riddleData)
-            const time = riddle.startQuestion()
-            console.log(` You took ${time} ms to answer.`);
+            const choice = readline.question()
 
-            player.addTime(time)
+            switch (choice) {
+                case "1":
+                    await RunRiddles(filePath, player)
+                    break;
+                case "2":
+                    await ModifyRiddlesMenu(filePath)
+                    break
+                case "3":
+                    isQuit = true
+                    console.log(`bye bye`);
+                    break
+                default:
+                    console.log("not a choice");
+
+                    break;
+            }
         }
-        player.showStats()
+
+
+
     } catch (err) {
         console.error("An unexpected error occurred:", err.message);
     }
 }
 
 
-function chooserRiddles(riddles) {
+async function chooserRiddles(filePath) {
+    const riddles = await read(filePath)
     const choosedRiddles = []
-    for (let index = 0; index < 10; index++) {
+
+    for (let index = 0; index < 2; index++) {
         const randomIndex = Math.floor(Math.random() * riddles.length);
         const chosenRiddle = riddles[randomIndex];
         choosedRiddles.push(chosenRiddle);
@@ -39,5 +57,62 @@ function chooserRiddles(riddles) {
 
     }
     return choosedRiddles;
+}
+async function RunRiddles(filePath, player) {
+    const choosenRiddles = await chooserRiddles(filePath);
+
+    for (const riddleData of choosenRiddles) {
+        const riddle = new MultipleChoiceRiddle(riddleData)
+        const time = riddle.startQuestion()
+        console.log(` You took ${time} ms to answer.`);
+
+        player.addTime(time)
+    }
+    player.showStats()
+}
+
+async function ModifyRiddlesMenu(filePath) {
+
+    let isQuit = false
+
+    while (!isQuit) {
+        console.log(`1. Create a new riddle`);
+        console.log(`2. Read all riddles`);
+        console.log(`3. Update an existing riddle`);
+        console.log(`4. Delete a riddle`);
+        console.log(`5. Exit`);
+
+        const choice = readline.question()
+
+
+        switch (choice) {
+            case "1":
+                await addRiddle(filePath)
+                break;
+            case "2":
+                await readAll(filePath);
+                break
+            case "3":
+                const targetIdToUpdate = readline.question("enter id:\n")
+                await updateRiddle(filePath, targetIdToUpdate)
+                break
+            case "4":
+                const targetIdToDelete = readline.question("enter id:\n")
+                await DeleteRiddleById(filePath, targetIdToDelete)
+                break
+            case "5":
+                isQuit = true
+                break
+
+            default:
+                console.log("not a choice");
+
+                break;
+        }
+    }
+
+
+
+
 }
 

@@ -2,7 +2,7 @@ import { read, write } from "./fileHelper.js";
 import readline from 'readline-sync';
 
 
-async function updateRiddle(filePath, targetId) {
+export async function updateRiddle(filePath, targetId) {
     try {
         const riddles = await read(filePath);
         const riddlesChanged = changeRiddle(riddles, targetId);
@@ -15,7 +15,7 @@ async function updateRiddle(filePath, targetId) {
 
 function changeRiddle(riddles, targetId) {
 
-    const riddle = riddles.find(riddle => riddle.id === targetId);
+    const riddle = riddles.find(riddle => riddle.id === Number(targetId));
     if (!riddle) {
         console.log(`No riddle found with id ${targetId}`);
         return riddles;

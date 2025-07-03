@@ -14,13 +14,16 @@ export async function readById(filePath, riddleId) {
 
 export async function readAll(filePath) {
     try {
-        const riddles = read(filePath)
-        return riddles
+        const riddles = await read(filePath)
+        console.log(`riddle inside readall ${riddles}`);
+
+        for (const riddle of riddles) {
+            console.log(riddle);
+        }
     } catch (error) {
         console.error(error)
         return null;
     }
 }
-//const filePath = '../DB/riddles.txt';
-//console.log(await readAll(filePath));
+const filePath = '../DB/riddles.txt';
 
