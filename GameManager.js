@@ -1,9 +1,13 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import MultipleChoiceRiddle from "./classes/MultipliChoiceRiddle.js"
 import readline from 'readline-sync';
-import { addRiddle, read, DeleteRiddleById, updateRiddle, readAll, findOrCreatePlayer, UpdateTimeOfPlayer } from "./classes/Import.js";
+import { addRiddle, read, DeleteRiddleById, updateRiddle, readAll, findOrCreatePlayer, UpdateTimeOfPlayer } from "./utils/Import.js";
 
-const riddlesPath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/riddles.txt"
-const playersPath = "C:/Users/JBH/OneDrive/Bureau/js/projects/riddle project/DB/players.txt"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const riddlesPath = path.join(__dirname, 'DB', 'riddles.txt');
+const playersPath = path.join(__dirname, 'DB', 'players.txt');
 
 
 export default async function RunMainMenu() {
