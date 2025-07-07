@@ -15,8 +15,8 @@ export async function read(filePath) {
     try {
         const data = await readFile(filePath, 'utf-8');
         if (!data) return []
-        const riddles = JSON.parse(data);
-        return riddles
+        const content = JSON.parse(data);
+        return content
     }
     catch (error) {
         console.error(error)
