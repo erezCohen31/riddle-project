@@ -24,7 +24,8 @@ export default async function RunMainMenu() {
         while (!isQuit) {
             console.log(`1. To play`);
             console.log(`2. Modify riddles`);
-            console.log(`3. to quit`);
+            console.log(`3. Show scores`);
+            console.log(`4. to quit`);
 
             const choice = readline.question()
 
@@ -36,6 +37,10 @@ export default async function RunMainMenu() {
                     await ModifyRiddlesMenu(riddlesPath)
                     break
                 case "3":
+                    isQuit = true
+                    await ShowScore(playersPath)
+                    break
+                case "4":
                     isQuit = true
                     console.log(`bye bye`);
                     break
@@ -53,7 +58,6 @@ export default async function RunMainMenu() {
     }
 }
 
-
 async function chooserRiddles(riddlesPath) {
     const riddles = await read(riddlesPath)
     const choosedRiddles = []
@@ -67,6 +71,7 @@ async function chooserRiddles(riddlesPath) {
     }
     return choosedRiddles;
 }
+
 async function RunRiddles(riddlesPath, player) {
     const choosenRiddles = await chooserRiddles(riddlesPath);
 
@@ -133,6 +138,16 @@ async function ModifyRiddlesMenu(riddlesPath) {
 
 
 
+}
+
+async function ShowScore(playersPath) {
+    const players = await read(playersPath);
+
+    players.sort((a, b) => a.lowestTime - b.lowestTime);
+
+    for (const player of players) {
+        console.log(`${player.name}: ${player.lowestTime}`);
+    }
 }
 
 
